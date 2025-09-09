@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import logo from "../img/logo.png";
+import logo from "../../public/img/logo.png";
 import ImageUploader from "./ImageUploader";
 import { useEffect, useState } from "react";
 
