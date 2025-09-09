@@ -2,11 +2,11 @@
 
 
 @keyframes slide {
-  0%{background-image: url(../src/img/main-1.jpg);}
-  25%{background-image: url(../src/img/main-2.jpg);}
-  50%{background-image: url(../src/img/main-3.jpg);}
-  75%{background-image: url(../src/img/main-4.jpg);}
-  100%{background-image: url(../src/img/main-5.jpg); background-size: contain;}
+  0%{background-image: url(../public/img/main-1.jpg);}
+  25%{background-image: url(../public/img/main-2.jpg);}
+  50%{background-image: url(../public/img/main-3.jpg);}
+  75%{background-image: url(../public/img/main-4.jpg);}
+  100%{background-image: url(../public/img/main-5.jpg); background-size: contain;}
 }
 @keyframes float {
   0%, 100% {
