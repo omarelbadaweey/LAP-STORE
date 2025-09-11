@@ -61,7 +61,7 @@ function ImageUploader() {
 
             {/* Dropdown Menu */}
             {open && (
-              <div className="fixed right-13 mt-4 w-56 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden z-50">
+              <div className="fixed top-[80px] right-13 w-56 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden z-50">
                 <div className="flex flex-col">
                   <input
                     type="file"

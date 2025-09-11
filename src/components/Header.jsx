@@ -1,7 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../public/img/logo.png";
 import ImageUploader from "./ImageUploader";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 function Header() {
   const [cart, setCart] = useState([]);
@@ -30,15 +31,60 @@ function Header() {
     return () => window.removeEventListener("storageUpdated", updateCart);
   }, []);
 
+  const showAlert = () => {
+    Swal.fire({
+      title: "Do you want to log out?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log out!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let timerInterval;
+        Swal.fire({
+          title: "You will be logged out",
+          html: "I will close in <b></b> milliseconds.",
+          timer: 1500,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+            const timer = Swal.getPopup().querySelector("b");
+            timerInterval = setInterval(() => {
+              timer.textContent = `${Swal.getTimerLeft()}`;
+            }, 100);
+          },
+          willClose: () => {
+            clearInterval(timerInterval);
+          },
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log("I was closed by the timer");
+          }
+        });
+        localStorage.clear();
+        setTimeout(() => {
+          navigate("/Register");
+        }, 1500);
+      }
+    });
+  };
+
+  const handelLogOut = () => {
+    showAlert();
+  };
   return (
     <header className=" h-[80px] mx-auto bg-black sticky top-0 left-0 overflow-hidden z-[1000]">
       <div className=" mx-auto capitalize text-white flex items-center justify-between w-[90%] h-[100%]">
-        <img
-          src={logo}
-          alt="Lap Store "
-          className="h-[125px]"
-          title="Lap Store"
-        />
+        <Link to={"/"}>
+          <img
+            src={logo}
+            alt="Lap Store "
+            className="h-[125px]"
+            title="Lap Store"
+          />
+        </Link>
         <div className="parent flex items-center">
           {!Data && (
             <>
@@ -76,36 +122,14 @@ function Header() {
               </span>
             </i>
           </button>
-
-          <div
-            dir="auto"
-            className="hidden overflow-auto h-auto max-h-[60vh] fixed top-[50%] left-[50%] translate-[-50%] bg-white text-black text-center px-4 py-6 rounded-lg shadow-lg w-[70%] md:w-[40%]"
-            id="cartDropdown"
-          >
-            <h3 className="text-2xl text-blue-400 font-bold mb-2 ">
-              عربة التسوق
-            </h3>
-
-            <div id="viewProduct">
-              {cart.map((item, index) => (
-                <p key={index}>{item.name}</p>
-              ))}
-            </div>
-
+          {Data && (
             <button
-              className=" cursor-pointer mt-2 px-4 py-2  text-white rounded-lg bg-red-700 hover:opacity-[.9]"
-              id="closeCard"
+              className="px-4 mx-4  py-1 text-lg md:text-xl  bg-red-700  border-2 border-red-700 rounded-4xl transition-all duration-[.7s] hover:bg-black hover:text-white font-bold cursor-pointer"
+              onClick={handelLogOut}
             >
-              إغلاق
+              <i class="fa-solid fa-right-from-bracket"></i>
             </button>
-            <button
-              className=" cursor-pointer mt-2 px-4 py-2 bg-black text-white rounded-lg hover:opacity-[.9]"
-              id="showCardPage"
-              onClick={() => navigate("/Cart")}
-            >
-              عرض المنتجات
-            </button>
-          </div>
+          )}
         </div>
       </div>
     </header>

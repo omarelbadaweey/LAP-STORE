@@ -48,3 +48,11 @@
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
+
+body{
+  background: linear-gradient(to bottom right, #dbeafe, #bfdbfe, #eff6ff);
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+
+}

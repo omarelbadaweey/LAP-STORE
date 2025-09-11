@@ -7,9 +7,9 @@ import Footer from "../components/Footer";
 function Container() {
   return (
     <div className="bg-gradient-to-br from-blue-100 via-blue-200 to-blue-50">
-      <Header />
+      
       <Hero />
-      <Content />
+      <Content/>
       <Footer />
     </div>
   );

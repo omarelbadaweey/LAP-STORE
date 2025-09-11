@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 function Footer() {
   const [showBtn, setShowBtn] = useState(false);
-  const navigate = useNavigate()
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 150) {
@@ -22,51 +20,8 @@ function Footer() {
     };
 
 
-        const showAlert = () =>{
-        Swal.fire({
-          title: "Do you want to log out?",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes, log out!",
-          }).then((result) => {
-        if (result.isConfirmed) {
-          let timerInterval;
-          Swal.fire({
-          title: "You will be logged out",
-          html: "I will close in <b></b> milliseconds.",
-          timer: 1500,
-          timerProgressBar: true,
-          didOpen: () => {
-              Swal.showLoading();
-              const timer = Swal.getPopup().querySelector("b");
-              timerInterval = setInterval(() => {
-              timer.textContent = `${Swal.getTimerLeft()}`;
-              }, 100);
-          },
-          willClose: () => {
-              clearInterval(timerInterval);
-          }
-          }).then((result) => {
-          /* Read more about handling dismissals below */
-          if (result.dismiss === Swal.DismissReason.timer) {
-              console.log("I was closed by the timer");
-          }
-          });
-          localStorage.clear()
-          setTimeout(() => {
-              navigate("/Register");
-          }, 1500);
-        }
-        });
-      }
-      const  handelLogOut = () => {
-          // e.preventDefault();
-          showAlert()
-          // navigate("/Register");
-    
-      }
+
+
 
   return (
 
@@ -75,7 +30,7 @@ function Footer() {
     <i className="fas fa-chevron-up text-xl"></i>
   </button>)}
       <footer className="bg-gradient-to-r from-black to-black text-gray-200 py-12 font-sans mt-[50px]">
-          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="max-w-7xl mx-auto  px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
             <div>
                 <h3 className="text-cyan-400 text-xl mb-4 font-semibold">Quick Links</h3>
                 <ul className="space-y-2 text-sm">
@@ -92,11 +47,7 @@ function Footer() {
                   <a href="#" className="text-teal-600 hover:text-white"><i className="fab fa-twitter"></i></a>
                   <a href="#" className="text-teal-600 hover:text-white"><i className="fab fa-linkedin"></i></a>
                 </div>
-                <button
-                  className="px-4 mt-3 py-1 text-lg md:text-xl  bg-red-700  border-2 border-red-700 rounded-4xl transition-all duration-[.7s] hover:bg-black hover:text-white font-bold cursor-pointer"
-                  onClick={handelLogOut}>
-                  log Out
-              </button>
+
             </div>
             <div>
                 <h3 className="text-cyan-400 text-xl mb-4 font-semibold">LAP STORE</h3>
