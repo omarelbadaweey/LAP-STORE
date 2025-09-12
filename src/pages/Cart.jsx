@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import TransitionPage from "./TransitionPage";
+import TransitionPage from "../components/TransitionPage";
 
 function Cart() {
   const [getProduct, setGetProduct] = useState([]);
@@ -14,11 +14,27 @@ function Cart() {
     const updatedProducts = getProduct.filter((prev) => prev.id !== id);
     setGetProduct(updatedProducts);
     localStorage.setItem("cart", JSON.stringify(updatedProducts));
+    window.dispatchEvent(new Event("storageUpdated"));
   };
 
+    const totalPrice = useMemo(() => {
+    return getProduct.reduce((acc, item) => {
+      // استخراج الرقم من السعر (لو فيه EGP أو فاصلة)
+      const numericPrice = Number(item.price.replace(/[^\d]/g, ""));
+      return acc + numericPrice;
+    }, 0);
+  }, [getProduct]);
+
+  const handelSuccessPage = () => {
+    if(getProduct.length > 0) {
+      navigate("/SuccessPage")
+      localStorage.removeItem("cart")
+      window.dispatchEvent(new Event("storageUpdated"));
+    } 
+  }
   return (
     <TransitionPage>
-      <section className="py-12 min-h-[calc(100vh-80px)] h-auto">
+      <section className="  py-12 min-h-[calc(100vh-80px)] h-auto">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-10 text-blue-700 drop-shadow-lg">
             عربة التسوق
@@ -69,6 +85,16 @@ function Cart() {
               ))}
             </div>
           )}
+        </div>
+
+        <div className="w-[80%] mx-auto   mt-[30px]" dir="auto">
+          <div className="flex justify-around bg-blue-400 p-2">
+            <p className="text-amber-50 font-bold">السعر الكلى : </p>
+            <p className="text-amber-50 font-bold text-xl underline">{totalPrice.toLocaleString()}</p>
+          </div>
+          <div className="text-center">
+            <button onClick={handelSuccessPage} className="bg-blue-400 p-2 font-serif text-white cursor-pointer transition-all duration-200 hover:bg-transparent hover:text-blue-400 border-2 border-blue-400 mt-2 w-full text-xl">شراء الان</button>
+          </div>
         </div>
       </section>
     </TransitionPage>

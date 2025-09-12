@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Content from "../components/Content";
 import Footer from "../components/Footer";
+import { Route, Routes } from "react-router-dom";
 
 function Container() {
   return (
@@ -11,6 +12,7 @@ function Container() {
       <Hero />
       <Content/>
       <Footer />
+
     </div>
   );
 }

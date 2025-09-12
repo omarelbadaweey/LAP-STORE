@@ -53,6 +53,11 @@ body{
   background: linear-gradient(to bottom right, #dbeafe, #bfdbfe, #eff6ff);
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 
+}
+.in-cart {
+  background-color: gray !important;
+  color: white !important;
+  pointer-events: none;
 }

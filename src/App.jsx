@@ -2,11 +2,11 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Cart from "./components/Cart";
+import Cart from "./pages/Cart";
 import { Toaster } from "react-hot-toast";
 import Header from "./components/Header";
-import Content from "./components/Content";
 import { AnimatePresence } from "motion/react";
+import SuccessPage from "./pages/SuccessPage";
 
 function App() {
   return (
@@ -30,8 +30,7 @@ function App() {
         <Route path="/Register" element={<Register />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/cart" element={<Cart />} />
-        {/* <Route path="/content" element={<Content />} /> */}
-        
+        <Route path="/SuccessPage" element={<SuccessPage />} />
       </Routes>
         </AnimatePresence>
     </>
