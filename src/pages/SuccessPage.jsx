@@ -7,7 +7,7 @@ function SuccessPage() {
 
   return (
     <TransitionPage>
-      <section className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-gradient-to-br from-green-100 via-white to-green-200">
+      <section className="min-h-[calc(100vh-80px)] flex items-center justify-center px-5 bg-gradient-to-br from-green-100 via-white to-green-200">
         <div className="bg-white rounded-2xl shadow-lg p-10 max-w-lg text-center border border-green-300">
           <img
             src="https://cdn-icons-png.flaticon.com/512/845/845646.png"
