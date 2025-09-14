@@ -59,7 +59,7 @@ function Register() {
             required
             onInput={(e) => setUsers({ ...user, password: e.target.value })}
           />
-          <span className="absolute bottom-[135px] text-[12px] text-red-400">يجب ان تكون كلمه المرور اكتر من 6 حروف</span>
+          <span className={`absolute bottom-[135px] text-[12px] ${user.password.length < 6 ? "text-red-400" : "text-green-600"}`}>{user.password.length == 0 ?"" : user.password.length < 6 ? "كلمه المرور قصيره يجب ان تكون 6 احرف" : user.password.length >= 6 ? "كلمه المرور مقبوله" :""}</span>
           <button
             type="submit"
             className="cursor-pointer bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 rounded-lg transition-colors"
